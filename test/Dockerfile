@@ -29,13 +29,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-ros-base=0.10.0-1* \
     && rm -rf /var/lib/apt/lists/*
 
-#RUN apt-get install ros-humble-joy ros-humble-joy-drivers
+#RUN apt-get install ros-humble-joy ros-humbler-joy-drivers
 
 #COPY . ~/project
 RUN git clone https://github.com/GreetingsAvil/Pioneers
-
+COPY ./ariaNode .
 RUN sudo apt-get update && sudo apt install -y joystick jstest-gtk evtest 
 RUN sudo apt install -y ros-humble-joy*
+#RUN sudo apt install rosbash
 RUN git clone https://github.com/reedhedges/AriaCoda.git
-#RUN cd AriaCoda && make && make install 
+RUN cd AriaCoda && make && make install 
+
+
 
