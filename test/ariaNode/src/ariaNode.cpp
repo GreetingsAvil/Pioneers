@@ -12,7 +12,7 @@
 #include <string>
 #include <signal.h>
 
-#include <rclcpp/rclcpp.hpp>
+#include <rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 
 # include "Aria/Aria.h"
