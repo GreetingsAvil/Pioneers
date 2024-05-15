@@ -19,7 +19,7 @@ RUN apt-get update -y && apt-get install --no-install-recommends -y \
     python3-vcstool \
     && rm -rf /var/lib/apt/lists/*
   
-RUN apt-get install -y doxygen build-essential 
+#RUN apt-get install -y doxygen build-essential 
 RUN git clone https://github.com/reedhedges/AriaCoda.git
 RUN cd AriaCoda && make && make install
 # bootstrap rosdep
