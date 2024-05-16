@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  base:
+    environment:
+      - ROS_MASTER_URI=https://localhost:8801
+    image: aria/ros:humble
+    build:
+      dockerfile: Dockerfile
+      args:
+        ROS_DISTRO: humble
+      target: base
+    volumes:
+      - type: bind
+        source: /dev
+        target: /dev
+    device_cgroup_rules:
+      - 'c *:* rmw'
+    #  command: ros2 run ariaNode ariaNode -rp /dev/ttyUSB0
+    command: /bin/bash -c "source install/setup.bash && source /opt/ros/humble/setup.bash && ros2 run ariaNode ariaNode -rp /dev/ttyUSB0" 
+  drive:
+    environment:
+      - ROS_DOMAIN_ID=243
+      - ROS_MASTER_URI=http://localhost:8101
+    image: aria/ros:humble
+    build:
+      dockerfile: Dockerfile
+      args:
+        ROS_DISTRO: humble
+      target: base
+    volumes:
+      - type: bind
+        source: /dev
+        target: /dev
+    device_cgroup_rules:
+      - 'c *:* rmw'
+    command: ros2 launch teleop_twist_joy teleop-launch.py
